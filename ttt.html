@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+		<head>
+		
+		
+
+		
+		
+				  <style type="text/css">
+				  body {
+						   background-color:#cfd1bc;
+							background-image:url(bt.jpg);
+							background-repeat:;
+							background-size:cover;
+							}
+					
+					h1 {text-align:center;color:;padding-top:20px;padding-bottom:10}
+					table {font-weight:bold;
+							font-family:Helvetica;
+							text-align:center;
+							color:#4286f4;text-color:#e55b20;align:center;}
+					h2 {color:red;}
+					h3 {text-align:center;color:grey;}
+					</style>
+					<script>
+					
+						function test()
+						{
+							var userinput = document.getElementById("userinput").value;
+							document.write(userinput);
+						}
+						function startgame()
+						{
+							for(var i=1;i<=9;i++)
+							reuse(i);
+						
+							document.turn="X";
+							if(Math.random()<0.5)
+							{
+							document.turn="O";
+							}
+							document.winner=null;
+							
+							setmessage("Let's go "+document.turn+",it's your turn.");
+						}
+						function setmessage(m)
+						{
+							document.getElementById("message").innerText=m;
+						}
+						function nextmove(x)
+						{
+						if(document.winner!=null)
+						{
+						setmessage("GAME OVER!!!"+document.winner + " has already won the game.");
+						}
+						else if(x.innerText=="")
+						{
+						x.innerText=document.turn;
+						switchturn();}
+						else
+						{var k=0;
+						for(var i=1;i<=9;i++)
+								{
+								if(document.getElementById("s"+i).innerText=="X"||document.getElementById("s"+i).innerText=="O")
+								 k++;
+								}
+						if(k!=9)
+						setmessage("That square is already used!");
+						else
+						setmessage("ALL SQUARES ARE FILLED;)\nGAME OVER!!!IT'S A DRAW\nRESTART TO CONTINUE..");
+						
+						}
+						}
+						function switchturn()
+						{
+								var k=0;
+								for(var i=1;i<=9;i++)
+								{
+								if(document.getElementById("s"+i).innerText=="X"||document.getElementById("s"+i).innerText=="O")
+								 k++;
+								}
+								if(winnercheck(document.turn))
+								{
+								setmessage("CONGOS ," + document.turn + " ! YOU WIN!");
+								document.winner=document.turn;
+								}
+								
+								else if(document.turn=="X"){
+								if(k!=9)
+								{
+								 document.turn="O";
+								 setmessage("Now it's " + document.turn + "'s turn");
+								 }
+								 else
+								 setmessage("GAME OVER!!!IT'S A DRAW\nRESTART TO CONTINUE..");
+								 }
+								else{
+								if(k!=9)
+								{
+								 document.turn="X";
+								 setmessage("Now it's " + document.turn + "'s turn");
+								 }
+								 else
+								 setmessage("GAME OVER!!!IT'S A DRAW");
+								 }
+						 }
+						function winnercheck(move)
+						{
+						var res=false;
+						if(boxrowcheck(1,2,3,move)||boxrowcheck(4,5,6,move)||boxrowcheck(7,8,9,move)||boxrowcheck(1,4,7,move)||boxrowcheck(2,5,8,move)||boxrowcheck(3,6,9,move)||boxrowcheck(1,5,9,move)||boxrowcheck(3,5,7,move))
+							{res=true;}
+							return res;
+							}
+						function boxrowcheck(a,b,c,move)
+						{
+						var res=false;
+						if(box(a)==move&&box(b)==move&&box(c)==move)
+						res=true;
+						
+						return res;
+						}
+						function box(number)
+						{
+						return document.getElementById("s"+number).innerText;
+						}
+						function reuse(number)
+						{
+						document.getElementById("s"+number).innerText="";
+						}
+					</script>
+			<title>
+			TIC-TAC-TOE 
+			</title> 
+		</head>
+		<body onload="startgame();">
+			<h1><a href="https://en.wikipedia.org/wiki/Tic-tac-toe" title="Click for description">TIC - TAC - TOE</a></h1>
+			<h2><div align="center"; id="message">ALL MESSAGES WILL GO HERE</div></h2>
+			<table style="margin:1em auto;" border="5" width="200" cellpadding="15" cellspacing="15">
+				<tr>
+				   <td id="s1" onclick="nextmove(this);"><h3></h3></td>
+				   <td id="s2" onclick="nextmove(this);"><h3></h3></td>
+				   <td id="s3" onclick="nextmove(this);"><h3></h3></td>
+				</tr>
+				<tr>
+				   <td id="s4" onclick="nextmove(this);"><h3></h3></td>
+				   <td id="s5" onclick="nextmove(this);"><h3></h3></td>
+				   <td id="s6" onclick="nextmove(this);"><h3></h3></td>
+				</tr>
+				<tr>
+				   <td id="s7" onclick="nextmove(this);"><h3></h3></td>
+				   <td id="s8" onclick="nextmove(this);"><h3></h3></td>
+				   <td id="s9" onclick="nextmove(this);"><h3></h3></td>
+				</tr>
+				</table>
+				<h3><a href="javascript:startgame();" title="TO RESTART THE GAME , CLICK THIS;)">RESTART</a></h3>
+		</body>
+</html>
